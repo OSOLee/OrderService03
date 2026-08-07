@@ -36,8 +36,8 @@ pipeline {
                 )]) {
                     sh '''
                     echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-                    docker tag ex01-order-service03-app:latest $DOCKERHUB_USERNAME/ex01-order-service03-app:latest
-                    docker push $DOCKERHUB_USERNAME/ex01-order-service03-app:latest
+                    docker tag order-service03-app:latest $DOCKERHUB_USERNAME/order-service03-app:latest
+                    docker push $DOCKERHUB_USERNAME/order-service03-app:latest
                     '''
                 }
             }
