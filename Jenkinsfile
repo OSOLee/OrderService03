@@ -23,5 +23,11 @@ pipeline {
                 sh 'docker version'
             }
         }
+        
+        stage('3. Docker build') {
+            steps {
+                sh 'docker build -t order-service03-app:latest'
+            }
+        }
     }
 }
