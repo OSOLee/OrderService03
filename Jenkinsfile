@@ -1,9 +1,11 @@
-pipeline{
-	agent any
-	
-	stages('0. 연결확인'){
-		steps{
-			echo '스테이지 출발'
-		}
-	}
+pipeline {
+    agent any
+
+    stages {
+        stage('0. 연결확인') {
+            steps {
+                echo '스테이지 출발'
+            }
+        }
+    }
 }
