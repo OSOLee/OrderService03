@@ -18,7 +18,7 @@ pipeline {
             }
         }
         
-        stage('2. Check Docker1') {
+        stage('2. Check Docker') {
             steps {
                 sh 'docker version'
             }
