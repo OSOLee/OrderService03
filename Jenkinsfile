@@ -6,7 +6,7 @@ pipeline {
     }
 
     stages {
-        stage('0. 자동화 연결확인') {
+        stage('0. 자동화2 연결확인') {
             steps {
                 echo '스테이지 출발'
             }
