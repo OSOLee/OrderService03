@@ -5,7 +5,7 @@ pipeline {
         maven 'my-maven'  // 젠킨스에서 설치한 이름
     }
 
-	environment {
+    environment {
         APP_NAME = 'order-service03-app'
         DOCKER_TAG = 'latest'
         IMAGE_NAME = "oso821/${APP_NAME}:${DOCKER_TAG}"
