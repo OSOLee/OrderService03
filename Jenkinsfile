@@ -5,6 +5,15 @@ pipeline {
         maven 'my-maven'  // 젠킨스에서 설치한 이름
     }
 
+	environment {
+        APP_NAME = 'order-service03-app'
+        DOCKER_TAG = 'latest'
+        IMAGE_NAME = "oso821/${APP_NAME}:${DOCKER_TAG}"
+        TARGET_HOST = '192.168.56.107'
+        TARGET_USER = 'vagrant'
+        PORT = '8081'
+    }
+
     stages {
         stage('0. 자동화 확인1') { steps { echo '스테이지 출발' } }
         
@@ -40,6 +49,19 @@ pipeline {
                     docker push $DOCKERHUB_USERNAME/order-service03-app:latest
                     '''
                 }
+            }
+        }
+        stage('5. Deploy to vm7') {
+            steps {
+                sh '''
+                    ssh -o StrictHostKeyChecking=no $TARGET_USER@$TARGET_HOST <<EOF
+                        # 이미지 pull 실패 시 즉시 스크립트 종료
+                        docker pull $IMAGE_NAME || exit 1
+                        # 기존 컨테이너 제거, 없을 경우 에러 무시
+                        docker rm -f $APP_NAME 2>/dev/null || true
+                        docker run -d -p $PORT:$PORT --name $APP_NAME $IMAGE_NAME
+EOF
+                '''
             }
         }
     }
